@@ -46,7 +46,7 @@
                               <td class="text-nowrap">ปีการศึกษา {{$item->year}}/{{$item->semester}}</td>
                               <td class="text-nowrap">{{$item->start_intern}}</td>
                               <td class="text-nowrap">{{$item->end_intern}}</td>
-                              <td>{!! statusCompany($item->status) !!}</td>
+                              <td>{!! statusCompany($item->status,$item->start_intern,$item->end_intern) !!}</td>
                               <td class=""style="color:red;"> {{(isset($item->cal_comment)) ?'* '.$item->cal_comment :''}}</td>
                               <td class="text-center"><a class="btn btn-link p-0" href="{{ route('student.company.update',$item->id)}}" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><span class="text-500 fas fa-edit"></span></a></td>
                             </tr>
