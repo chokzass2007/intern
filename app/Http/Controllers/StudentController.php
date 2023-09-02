@@ -19,8 +19,9 @@ class StudentController extends Controller
     }
     public function StudentReport(){
         $id = Auth::user()->id; // user()-> เข้าถึงตาราง id ที่ถูกเก็บไว้เข้ามาตอนล็อกอิน
+        $profileData = User::find($id);
         $company = Report::where('auth_id', $id)->join('companies','reports.com_id','=','companies.id')->get();
-        return view('student.student_report_list', compact('company'));
+        return view('student.student_report_list', compact('company','profileData'));
     }
     public function StudentReportStore(Request $request){//join table
         $user = Auth::user(); // ที่ถูกเก็บไว้เข้ามาตอนล็อกอิน
@@ -38,7 +39,7 @@ class StudentController extends Controller
         $data->report_from_date = $request->report_from_date;
         $data->report_to_date = $request->report_to_date;
         $data->i_amOk = $request->i_amOk;
-        
+
         $data->save();
 
         $notification = array(
@@ -47,9 +48,20 @@ class StudentController extends Controller
         );
         return redirect()->back()->with($notification);
     }
+    public function StudentCancelCompany(Request $request){
+        // dd($request);
+        $data = Company::find($request->id);
+        $data->status = 'ยกเลิก (โดยนักศึกษา)';
+        $data->cal_comment = 'ยกเลิก (โดยนักศึกษา)';
+        $data->update();
+
+        $id = Auth::user()->id; // user()-> เข้าถึงตาราง id ที่ถูกเก็บไว้เข้ามาตอนล็อกอิน
+        $company = Company::where('stuIdCreate', $id)->get();
+        return view('student.student_company_detail', compact('company'));
+    } // End Method
     public function StudentCompanyUpadate(Request $request,$id)
-    {   
-        
+    {
+        // dd($request);
         $request->validate([
             'year' => 'required',
             'semester' => 'required',
@@ -77,7 +89,7 @@ class StudentController extends Controller
         }
 
         $data->save();
-        
+
         $id = Auth::user()->id; // user()-> เข้าถึงตาราง id ที่ถูกเก็บไว้เข้ามาตอนล็อกอิน
         $company = Company::where('stuIdCreate', $id)->get();
         return view('student.student_company_detail', compact('company'));
@@ -196,7 +208,7 @@ class StudentController extends Controller
             'major' => 'required',
             'phone' => 'required',
         ]);
-        
+
         $data->fName = $request->fName;
         $data->lName = $request->lName;
         $data->email = $request->email;
@@ -215,7 +227,7 @@ class StudentController extends Controller
             'message' => 'อัพเดทโปรไฟล์ สำเร็จ',
             'alert-type' => 'success'
         );
-        
+
         return redirect()->back()->with($notification);
     } //End Method
 

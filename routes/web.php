@@ -59,19 +59,19 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     // แก้ไขโปรไฟล์
     Route::get('/teacher/change_profile', [TeacherController::class, 'TeacherChangeProfile'])->name('teacher.change.profile');
     Route::post('/teacher/update_profile', [TeacherController::class, 'TeacherUpdateProfile'])->name('teacher.update.profile');
-    // Report Teacher          
+    // Report Teacher
     Route::get('/teacher/report',  [TeacherController::class, 'TeacherReport'])->name('teacher.report');
-    // Select Year intern Teacher          
+    // Select Year intern Teacher
     Route::post('/teacher/data',  [TeacherController::class, 'TeacherSelect'])->name('teacher.select');
-    // API           
+    // API
     Route::get('/teacher/data/api/{id}/{ic}',  [TeacherController::class, 'TeacherApiApprove'])->name('teacher.api');
     Route::put('/teacher/data/cancel/',  [TeacherController::class, 'TeacherApiCancel'])->name('teacher.cancel');
     // Approve Intern Teacher
     Route::put('/teacher/data/approve',  [TeacherController::class, 'TeacherApprove'])->name('teacher.approve');
     // PDF Teacher
     Route::get('/teacher/pdf/{id}',  [PDFController::class, 'generatePDF'])->name('pdf.no1');
-    Route::get('/teacher/pdf-no2/{id}',  [PDFController::class, 'generatePDFNo2'])->name('pdf.no2');
-    
+    Route::get('/teacher/pdf-no3/{id}',  [PDFController::class, 'generatePDFNo3'])->name('pdf.no3');
+
 }); // End Group Teacher Middleware
 
 
@@ -86,17 +86,18 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 
 Route::middleware(['auth', 'role:student'])->group(function () {
 
-    // Report Student          
+    // Report Student
     Route::get('/student/report',  [StudentController::class, 'StudentReport'])->name('student.report');
     Route::post('/student/report_store',  [StudentController::class, 'StudentReportStore'])->name('student.report.store');
     Route::put('/student/report_store/{id}',  [StudentController::class, 'StudentReportUpdate'])->name('student.report.update');
-    // Update Company           
+    // Update Company
     Route::get('/student/company_detail_/{id}',  [StudentController::class, 'StudentCompanyDetailId'])->name('student.company.update');
     Route::put('/student/company_detail_update/{id}',  [StudentController::class, 'StudentCompanyUpadate'])->name('student.company.update.update');
-    // Company            
+    // Company
     Route::get('/student/company_detail',  [StudentController::class, 'StudentCompanyDetail'])->name('student_company_detail');
     Route::get('/student/company', [StudentController::class, 'StudentCompany'])->name('student_company');
     Route::post('/student/company_store', [StudentController::class, 'StudentCompanyStore'])->name('student.store.company');
+    Route::patch('/student/company_cancel', [StudentController::class, 'StudentCancelCompany'])->name('student.cancel.company');
     // Logout
     Route::get('/student/logout', [StudentController::class, 'StudentLogout'])->name('student.logout');
     //เปลี่ยนพาสเวิร์ค

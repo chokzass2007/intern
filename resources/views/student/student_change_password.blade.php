@@ -1,13 +1,11 @@
 @php
     use Illuminate\Support\Carbon;
-    
+
     $countDate = abs(strtotime($profileData->start_intern) - strtotime($profileData->end_intern)) / 86400;
 @endphp
 @extends('layouts.layout')
 
 @section('main-content')
-    @include('navbars.navbar-vertical')
-    @include('navbars.navber-top-default')
     <div class="card-body position-relative">
         {{-- start center --}}
         <h3 class="fw-light overflow-hidden font-sans-serif"> <span style="color: #2c7be5" class="typed-text fw-bold ms-1 "
@@ -114,7 +112,7 @@
             <div class="col-xxl-7">
                 <div class="card h-100 font-sans-serif">
                     <div class="card-body">
-                        
+
                     <h3 class="fw-light overflow-hidden font-sans-serif text-center">
                         <span style="color: #2c7be5" class="typed-text fw-bold ms-1 ">เปลี่ยนพาสเวิร์คนักศึกษา</span>
                     </h3>
@@ -160,7 +158,7 @@
                 </div>
             </div>
         </div>
-        
+
         {{-- end --}}
     </div>
     @include('partials.footer')

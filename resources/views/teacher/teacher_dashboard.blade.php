@@ -2,8 +2,6 @@
 
 @section('main-content')
     @include('layouts.function')
-    @include('navbars.navbar-vertical')
-    @include('navbars.navber-top-default')
     <div class="card-body position-relative">
         {{-- start center --}}
         <h3 class="fw-light overflow-hidden font-sans-serif"> <span style="color: #2c7be5" class="typed-text fw-bold ms-1 "
@@ -59,7 +57,7 @@
                                     <a class="btn btn-warning me-1 mb-1" href="{{ route('pdf.no1', $item->user_id) }}"
                                         target=”_blank”>ทดน.2
                                     </a>
-                                    <a class="btn btn-info  me-1 mb-1" href="{{ route('pdf.no2', $item->user_id) }}"
+                                    <a class="btn btn-info  me-1 mb-1" href="{{ route('pdf.no3', $item->user_id) }}"
                                         target=”_blank”>ทดน.3
                                     </a>
                                     <a class="btn btn-secondary me-1 mb-1" href="{{ route('pdf.no1', $item->user_id) }}"

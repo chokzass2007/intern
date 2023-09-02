@@ -68,6 +68,8 @@
     <!-- ===============================================-->
     <main class="main" id="top">
         <div class="container" data-layout="container">
+    @include('navbars.navbar-vertical')
+    @include('navbars.navber-top-default')
             <script>
                 var isFluid = JSON.parse(localStorage.getItem('isFluid'));
                 if (isFluid) {

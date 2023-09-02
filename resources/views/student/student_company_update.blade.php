@@ -1,7 +1,5 @@
 @extends('layouts.layout')
 @section('main-content')
-    @include('navbars.navbar-vertical')
-    @include('navbars.navber-top-default')
     <div class="card-body position-relative">
         {{-- start center --}}
         <h3 class="fw-light overflow-hidden font-sans-serif"> <span style="color: #2c7be5" class="typed-text fw-bold ms-1 "
@@ -14,7 +12,8 @@
                         <div class="card h-100">
                             <div class="card-header">
                                 <h5 class="mb-0">บริษัทฝึกงาน</h5>
-                                <a class="btn btn-primary  btn-sm px-3 mt-2 " href="{{route('student_company_detail')}}">ย้อนกลับ</a>
+                                <a class="btn btn-primary  btn-sm px-3 mt-2 "
+                                    href="{{ route('student_company_detail') }}">ย้อนกลับ</a>
                             </div>
                             <div class="card-body bg-light pb-0">
                                 <div class="collapse show" id="experience-form" style="">
@@ -67,16 +66,18 @@
                                             <label class="form-label" for="city">ชื่อหัวหน้า/หน่วยงาน/เจ้าของ</label>
                                         </div>
                                         <div class="col-9 col-sm-7 mb-3">
-                                            <input required="" value="{{ $data->bossName }}" class="form-control form-control-sm" id="city"
-                                                type="text" name="bossName">
+                                            <input required="" value="{{ $data->bossName }}"
+                                                class="form-control form-control-sm" id="city" type="text"
+                                                name="bossName">
                                             <p class="text-danger">* ชื่อสำหรับขออนุญาตการฝึกงาน </p>
                                         </div>
                                         <div class="col-3 mb-3 text-lg-end">
                                             <label class="form-label" for="exp-description">ตำแหน่ง </label>
                                         </div>
                                         <div class="col-9 col-sm-7 mb-3">
-                                            <input required=""value="{{ $data->positionName }}" class="form-control form-control-sm" id="city"
-                                                type="text" name="positionName">
+                                            <input required=""value="{{ $data->positionName }}"
+                                                class="form-control form-control-sm" id="city" type="text"
+                                                name="positionName">
                                         </div>
 
                                         <div class="col-3 mb-3 text-lg-end">
@@ -99,13 +100,27 @@
                                         </div>
                                         <div class="col-9 col-sm-7 mb-3">
                                             <img id="showImage" class="rounded-3"
-                                                    src="{{ !empty($data->photo) ? url('upload/' . $data->photo) : url('upload/no_image.jpg') }}"
-                                                    alt="profile" width="150" />
+                                                src="{{ !empty($data->photo) ? url('upload/' . $data->photo) : url('upload/no_image.jpg') }}"
+                                                alt="profile" width="150" />
                                         </div>
                                         <div class="col-9 col-sm-7 offset-3">
                                             <button class="btn btn-primary" type="submit">ยืนยัน</button>
+
                                         </div>
                                     </form>
+                                    @if ($data->status !== 'ยกเลิก (โดยนักศึกษา)' && $data->status !== 'รออาจารย์อนุมัติ' && $data->status !== 'รอฝึกงาน')
+                                        <div class="col-9 col-sm-7 offset-3">
+                                            <form action="{{ route('student.cancel.company') }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button class="btn btn-danger" type="submit" name="id"
+                                                    onclick="return confirm('ยกเลิกการฝึกงานบริษัทนี้?')"
+                                                    value="{{ $data->id }}">ยกเลิกการฝึกงานบริษัทนี้</button>
+                                            </form>
+                                        </div>
+                                    @endif
+
+
                                     <div class="border-dashed-bottom my-4"></div>
                                 </div>
                             </div>
@@ -121,7 +136,8 @@
     @include('partials.footer')
     </div>
 @endsection
-<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
         $('#image').change(function(e) {
@@ -133,5 +149,4 @@
         });
 
     });
- 
 </script>

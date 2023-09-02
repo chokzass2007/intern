@@ -16,7 +16,7 @@ class TeacherController extends Controller
     public function TeacherDashboard()
     {
         return view('teacher.teacher_dashboard');
-    } 
+    }
     // ยกเลิกการฝึกงานกลางคัน (โดยอาจารย์)
     public function TeacherApiCancel(Request $request){
         $request->validate([

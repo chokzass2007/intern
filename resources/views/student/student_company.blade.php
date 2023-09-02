@@ -1,7 +1,5 @@
 @extends('layouts.layout')
 @section('main-content')
-    @include('navbars.navbar-vertical')
-    @include('navbars.navber-top-default')
     <div class="card-body position-relative">
         {{-- start center --}}
         <h3 class="fw-light overflow-hidden font-sans-serif"> <span style="color: #2c7be5" class="typed-text fw-bold ms-1 "
@@ -101,7 +99,7 @@
                                                     src="{{ !empty($profileData->photo) ? url('upload/' . $profileData->photo) : url('upload/no_image.jpg') }}"
                                                     alt="profile" width="150" />
                                         </div>
-                                            
+
                                             <div class="col-9 col-sm-7 offset-3">
                                                 <button class="btn btn-primary" type="submit">ยืนยัน</button>
                                             </div>
@@ -133,5 +131,5 @@
         });
 
     });
- 
+
 </script>

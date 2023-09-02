@@ -15,8 +15,6 @@ if ($countStartDate >= '200') {
 @extends('layouts.layout')
 
 @section('main-content')
-    @include('navbars.navbar-vertical')
-    @include('navbars.navber-top-default')
     <div class="card-body position-relative">
         {{-- start center --}}
         <h3 class="fw-light overflow-hidden font-sans-serif"> <span style="color: #2c7be5" class="typed-text fw-bold ms-1 "

@@ -6,8 +6,6 @@ $countDate = abs(strtotime($profileData->start_intern) - strtotime($profileData-
 @extends('layouts.layout')
 
 @section('main-content')
-    @include('navbars.navbar-vertical')
-    @include('navbars.navber-top-default')
     <div class="card-body position-relative">
         {{-- start center --}}
         <h3 class="fw-light overflow-hidden font-sans-serif"> <span style="color: #2c7be5" class="typed-text fw-bold ms-1 "
@@ -89,7 +87,7 @@ $countDate = abs(strtotime($profileData->start_intern) - strtotime($profileData-
                             </div>
                             <div class="card-body">
                                 <div class="row g-0">
-                                    
+
                                     <div class="col-6 mt-n4 d-flex justify-content-end">
                                         <div class="echart-default" data-echart-responsive="true"
                                             data-echarts="{&quot;xAxis&quot;:{&quot;data&quot;:[&quot;Day 1&quot;,&quot;Day 2&quot;,&quot;Day 3&quot;,&quot;Day 4&quot;,&quot;Day 5&quot;,&quot;Day 6&quot;,&quot;Day 7&quot;,&quot;Day 8&quot;]},&quot;series&quot;:[{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:[55,60,40,120,70,80,35,80,85],&quot;smooth&quot;:true,&quot;lineStyle&quot;:{&quot;width&quot;:2}}],&quot;grid&quot;:{&quot;bottom&quot;:&quot;2%&quot;,&quot;top&quot;:&quot;2%&quot;,&quot;right&quot;:&quot;0px&quot;,&quot;left&quot;:&quot;10px&quot;}}"
@@ -140,7 +138,7 @@ $countDate = abs(strtotime($profileData->start_intern) - strtotime($profileData-
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 </div>
-                               
+
                                 <div class="col-12 mt-3 d-flex justify-content-center">
                                     <button class="btn btn-primary me-1 mb-1" type="submit">
                                         <span class="fas fa-save ms-1" data-fa-transform="shrink-3"></span> Save
@@ -152,7 +150,7 @@ $countDate = abs(strtotime($profileData->start_intern) - strtotime($profileData-
                 </div>
             </div>
         </div>
-       
+
         {{-- end --}}
     </div>
     @include('partials.footer')

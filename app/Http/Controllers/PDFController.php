@@ -31,7 +31,7 @@ class PDFController extends Controller
         return $pdf->stream($name->fName . ' ' . $name->lName . ' ' . $name->idStudent . '.pdf');
     }// End Method
 
-    public function generatePDFNo2($id)
+    public function generatePDFNo3($id)
     {
 
         $name = User::find($id);
@@ -41,7 +41,7 @@ class PDFController extends Controller
             ->selectRaw("REPLACE(company, 'บริษัท', ' ') AS comName")
             ->get();
 
-        $pdf = PDF::loadView('pdf.view2', ['data' => $data,]);
+        $pdf = PDF::loadView('pdf.view3', ['data' => $data,]);
         $pdf->add_info('Title', $name->fName . ' ' . $name->lName . ' ' . $name->idStudent);
         $pdf->setPaper('A4', 'portrait');
         $pdf->render();
