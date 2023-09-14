@@ -83,6 +83,7 @@ class TeacherController extends Controller
         $data['company'] = Company::where('id',$ic)->select('id','company')->get();
         return response()->json($data);
     } // End Method
+    
     // เรียกข้อมูลไปแสดง/teacher/data
     public function TeacherSelect(Request $request)
     {
@@ -98,6 +99,7 @@ class TeacherController extends Controller
                 'users.id AS user_id',
                 'users.lName',
                 'users.photo',
+                'users.company_intern',
                 'companies.start_intern',
                 'companies.end_intern',
                 'companies.img',
@@ -237,8 +239,8 @@ class TeacherController extends Controller
             $file = $request->file('photo'); // file('photo') เก็บไว้ในตัวแปร
             @unlink(public_path('upload/' . $request->photo));
             $filename = date('YmdHi') . $file->getClientOriginalName(); //เปลี่ยนชื่อ โดยใช้ วัน/เวลา เชื่อมชื่อไฟล์ป้องกันการใช้ชื่อซ้ำ
-            Storage::disk('public')->put('upload/'. $filename, $file);
-            // $file->move(public_path('upload/'), $filename); // ย้ายไฟล์ไปไว้ที่โฟล๋เดอร์ที่กำหนด
+            // Storage::disk('public')->put('upload/'. $filename, $file);
+            $file->move(public_path('upload/'), $filename); // ย้ายไฟล์ไปไว้ที่โฟล๋เดอร์ที่กำหนด
             $request['photo'] = $filename;
             $users->photo = $filename;
             $users->save();

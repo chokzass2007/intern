@@ -37,26 +37,34 @@ $profileData = App\Models\User::find($id);
                    <!-- more inner pages-->
                    <a class="nav-link" href="{{ route('student_company') }}" data-bs-toggle="" aria-expanded="false">
                     <div class="d-flex align-items-center">
-                      <span class="fas fa-chart-pie"></span><span class="nav-link-text fs-1  ps-2">เพิ่มบริษัทฝึกงาน</span>
+                        <img
+                        class="align-self-center me-2" src="{{ asset('assets\img\icons\1company.png') }}"
+                        alt="Generic placeholder image" width="25"><span class="nav-link-text fs-1  ps-2">เพิ่มบริษัทฝึกงาน</span>
                     </div>
                   </a>
                   <a class="nav-link active" href="{{ route('student_company_detail') }}" data-bs-toggle="" aria-expanded="false">
                         <div class="d-flex align-items-center">
-                          <span class="fas fa-chart-pie"></span><span class="nav-link-text fs-1 ps-2">ประวัติการฝึกงาน</span>
+                          <img
+                        class="align-self-center me-2" src="{{ asset('assets\img\icons\1list.png') }}"
+                        alt="Generic placeholder image" width="25"><span class="nav-link-text fs-1 ps-2">ประวัติการฝึกงาน</span>
                         </div>
                       </a>
                       <!-- more inner pages-->
 
                    <a class="nav-link" href="{{ route('' . $profileData->role . '.report') }}" data-bs-toggle="" aria-expanded="false">
                         <div class="d-flex align-items-center">
-                          <span class="fas fa-chart-pie"></span><span class="nav-link-text fs-1  ps-2">รายงานการฝึกงาน</span>
+                          <img
+                        class="align-self-center me-2" src="{{ asset('assets\img\icons\1report.png') }}"
+                        alt="Generic placeholder image" width="25"><span class="nav-link-text fs-1  ps-2">รายงานการฝึกงาน</span>
                         </div>
                       </a>
                       <!-- more inner pages-->
 
                    <a class="nav-link" href="{{ route('' . $profileData->role . '.change.profile') }}" data-bs-toggle="" aria-expanded="false">
                         <div class="d-flex align-items-center">
-                          <span class="fas fa-chart-pie"></span><span class="nav-link-text fs-1  ps-2">แก้ไขข้อมูลส่วนตัว</span>
+                            <img
+                            class="align-self-center me-2" src="{{ asset('assets/img/logos/editprofile.png') }}"
+                            alt="Generic placeholder image" width="25"><span class="nav-link-text fs-1  ps-2">แก้ไขข้อมูลส่วนตัว</span>
                         </div>
                       </a>
 

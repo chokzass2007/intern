@@ -19,7 +19,12 @@ return new class extends Migration
             $table->string('company')->nullable();
             $table->string('bossName')->nullable();
             $table->string('positionName')->nullable();
+            $table->string('telCompany')->nullable();
             $table->string('address')->nullable();
+            $table->string('provinceCompany')->nullable();
+            $table->string('amphoeCompany')->nullable();
+            $table->string('tambonCompany')->nullable();
+            $table->string('zipcodeCompany')->nullable();
             $table->date('start_intern')->nullable();
             $table->date('end_intern')->nullable();
             $table->string('status')->default('รออาจารย์อนุมัติ')->nullable();

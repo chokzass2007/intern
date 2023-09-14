@@ -79,28 +79,77 @@
                                                 class="form-control form-control-sm" id="city" type="text"
                                                 name="positionName">
                                         </div>
+                                        <div class="col-3 mb-3 text-lg-end">
+                                            <label class="form-label" for="exp-description">เบอร์โทรศัพท์บริษัท </label>
+                                        </div>
+                                        <div class="col-9 col-sm-7 mb-3">
+                                            <input required="" class="form-control form-control-sm" type="text"
+                                                name="telCompany" value="{{ $data->telCompany }}">
+                                            <p class="text-danger">* เบอร์โทรศัพท์บริษัท หรือผู้ประสานงานที่ติดต่อได้ </p>
+                                        </div>
+                                        <div class="col-3 mb-3 text-lg-end">
+                                            <label class="form-label" for="exp-description">ที่อยู่บริษัท เลขที่ หมู่ ถนน
+                                            </label>
+                                        </div>
+                                        <div class="col-9 col-sm-7 mb-3">
+                                            <input required="" class="form-control form-control-sm" type="text"
+                                                name="address" value="{{ $data->address }}">
+                                        </div>
 
                                         <div class="col-3 mb-3 text-lg-end">
-                                            <label class="form-label" for="exp-description">ที่อยู่บริษัท </label>
+                                            <label class="form-label" for="exp-description">จังหวัด </label>
+                                        </div>
+                                        <div class="col-9 col-sm-7 mb-3">
+                                            <select class="form-select " id="provinceCompany" size="1"
+                                                name="provinceCompany" required>
+                                                <option value="{{ $data->provinceCompany }}">{{ $data->provinceCompany }}</option>
+                                                @foreach ($provinces as $item)
+                                                    <option value="{{ $item->province }}">{{ $item->province }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="col-3 mb-3 text-lg-end">
+                                            <label class="form-label" for="exp-description">อำเภอ/เขต </label>
+                                        </div>
+                                        <div class="col-9 col-sm-7 mb-3">
+                                            <select class="form-select " id="amphoeCompany" size="1"
+                                                name="amphoeCompany" required>
+                                                <option value="{{ $data->amphoeCompany }}">{{ $data->amphoeCompany }}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-3 mb-3 text-lg-end">
+                                            <label class="form-label" for="exp-description">ตำบล/แขวง </label>
+                                        </div>
+                                        <div class="col-9 col-sm-7 mb-3">
+                                            <select class="form-select " id="tambonCompany" size="1"
+                                                name="tambonCompany" required>
+                                                <option value="{{ $data->tambonCompany }}">{{ $data->tambonCompany }}</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-3 mb-3 text-lg-end">
+                                            <label class="form-label" for="exp-description">รหัสไปรษณีย์ </label>
                                         </div>
 
                                         <div class="col-9 col-sm-7 mb-3">
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" id="city" type="text" name="address"
-                                                rows="5" required="">{{ $data->address }}</textarea>
+                                            <input required="" class="form-control form-control-sm" id="zipcodeCompany" type="text"
+                                                name="zipcodeCompany"value="{{ $data->zipcodeCompany }}" required>
                                         </div>
                                         <div class="col-3 mb-3 text-lg-end">
                                             <label class="form-label" for="phone">รูป</label>
                                         </div>
                                         <div class="col-9 col-sm-7 mb-3">
                                             <input class="form-control" name="photo" type="file" id="image"
-                                                accept="image/png, image/gif, image/jpeg" />
+                                               value="{{ $data->img}}" accept="image/png, image/gif, image/jpeg" />
                                         </div>
                                         <div class="col-3 mb-3 text-lg-end">
                                             <label class="form-label" for="phone">รูป</label>
                                         </div>
                                         <div class="col-9 col-sm-7 mb-3">
                                             <img id="showImage" class="rounded-3"
-                                                src="{{ !empty($data->photo) ? url('upload/' . $data->photo) : url('upload/no_image.jpg') }}"
+                                                src="{{ ($data->img != ' ') ? url('upload/' . $data->img) : url('upload/no_image.jpg') }}"
                                                 alt="profile" width="150" />
                                         </div>
                                         <div class="col-9 col-sm-7 offset-3">
@@ -147,6 +196,94 @@
             }
             reader.readAsDataURL(e.target.files['0']);
         });
+
+         // Start Method Provinec
+         $(document).on('change', '#provinceCompany', function() {
+            let province = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ URL::previous() }}/amphoe",
+                data: {
+                    province: province
+                },
+                success: function(reponse) {
+                    $('#amphoeCompany').empty();
+                    $('#tambonCompany').empty();
+                    $('#zipcodeCompany').val('');
+                    let option = document.createElement("option");
+                        option.text =' ';
+                        option.value =' ';
+                        let select = document.getElementById("amphoeCompany");
+                        select.appendChild(option);
+                    for (let i in reponse) {
+                        let option = document.createElement("option");
+                        option.text = reponse[i].amphoe;
+                        option.value = reponse[i].amphoe;
+                        let select = document.getElementById("amphoeCompany");
+                        select.appendChild(option);
+                    }
+                }
+            });
+        }); // End Method
+
+        // Start Method Tambons
+        $(document).on('change', '#amphoeCompany', function() {
+            let amphoe = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ URL::previous() }}/tambon",
+                data: {
+                    amphoe: amphoe
+                },
+                success: function(reponse) {
+                    $('#tambonCompany').empty();
+                    $('#zipcodeCompany').val('');
+                    let option = document.createElement("option");
+                        option.text = ' ';
+                        option.value = ' ';
+                        let select = document.getElementById("tambonCompany");
+                        select.appendChild(option);
+                    for (let i in reponse) {
+                        let option = document.createElement("option");
+                        option.text = reponse[i].tambon;
+                        option.value = reponse[i].tambon;
+                        let select = document.getElementById("tambonCompany");
+                        select.appendChild(option);
+                    }
+                }
+            });
+        }); // End Method
+
+        // Start Method Zipcode
+        $(document).on('change', '#tambonCompany', function() {
+            let tambon = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ URL::previous() }}/zipcode",
+                data: {
+                    tambon: tambon
+                },
+                success: function(reponse) {
+                    $('#zipcodeCompany').val('');
+                    $('#zipcodeCompany').val( reponse[0].zipcode);
+                }
+            });
+        }); // End Method
 
     });
 </script>

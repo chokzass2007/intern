@@ -37,7 +37,7 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap"
         rel="stylesheet">
 
-
+        <link href="{{ asset('vendors/choices/choices.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('vendors/overlayscrollbars/OverlayScrollbars.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/theme-rtl.css') }}" rel="stylesheet" id="style-rtl">
     <link href="{{ asset('assets/css/theme.css') }}" rel="stylesheet" id="style-default">
@@ -95,6 +95,7 @@
     <script src="{{ asset('assets/js/flatpickr.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"></script>
+    <script src="{{ asset('vendors/choices/choices.min.js') }}"></script>
     <script src="{{ asset('vendors/list.js/list.min.js') }}"></script>
     <script src="{{ asset('vendors/typed.js/typed.js') }}"></script>
     <script src="{{ asset('vendors/popper/popper.min.js') }}"></script>

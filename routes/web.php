@@ -6,6 +6,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ControllerProvince;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -38,6 +39,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 // Register
 Route::post('/registerr', [TeacherController::class, 'store'])->name('sau_register');
+// Select Province
+Route::post('/student/company/amphoe', [ControllerProvince::class, 'amphoe']);
+Route::post('/student/company/tambon', [ControllerProvince::class, 'tambon']);
+Route::post('/student/company/zipcode', [ControllerProvince::class, 'zipcode']);
+// Select Province Update
+Route::post('/student/company_detail/amphoe', [ControllerProvince::class, 'amphoe']);
+Route::post('/student/company_detail/tambon', [ControllerProvince::class, 'tambon']);
+Route::post('/student/company_detail/zipcode', [ControllerProvince::class, 'zipcode']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -70,6 +80,7 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::put('/teacher/data/approve',  [TeacherController::class, 'TeacherApprove'])->name('teacher.approve');
     // PDF Teacher
     Route::get('/teacher/pdf/{id}',  [PDFController::class, 'generatePDF'])->name('pdf.no1');
+    Route::get('/teacher/pdf-no2/{id}',  [PDFController::class, 'generatePDFNo2'])->name('pdf.no2');
     Route::get('/teacher/pdf-no3/{id}',  [PDFController::class, 'generatePDFNo3'])->name('pdf.no3');
 
 }); // End Group Teacher Middleware
@@ -86,10 +97,12 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 
 Route::middleware(['auth', 'role:student'])->group(function () {
 
+    // API Report
+    Route::get('/student/report/{id}',  [StudentController::class, 'StudentViewReport']);
     // Report Student
     Route::get('/student/report',  [StudentController::class, 'StudentReport'])->name('student.report');
     Route::post('/student/report_store',  [StudentController::class, 'StudentReportStore'])->name('student.report.store');
-    Route::put('/student/report_store/{id}',  [StudentController::class, 'StudentReportUpdate'])->name('student.report.update');
+    Route::put('/student/report/report_update',  [StudentController::class, 'StudentReportUpdate'])->name('student.report.update');
     // Update Company
     Route::get('/student/company_detail_/{id}',  [StudentController::class, 'StudentCompanyDetailId'])->name('student.company.update');
     Route::put('/student/company_detail_update/{id}',  [StudentController::class, 'StudentCompanyUpadate'])->name('student.company.update.update');

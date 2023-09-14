@@ -13,14 +13,14 @@
     function badgesStatus($status, $end_intern, $start_intern)
     {
         if ($status === 'รออาจารย์อนุมัติ') {
-            $badges = '<small class="badge badge  badge-soft-Secondary">' . $status . '</small>';
+            $badges = '<small class="badge badge  badge-soft-secondary">' . $status . '</small>';
         } elseif ($status === 'รอดำเนินการยื่นเรื่องฝึกงาน') {
             $badges = '<small class="badge badge  badge-soft-warning">' . $status . '</small>';
         } elseif ($status === 'รอฝึกงาน') {
             if (strtotime(date('Y-m-d')) > strtotime($end_intern)) {
                 $badges = '<small class="badge badge  badge-soft-success">ฝึกงานสำเร็จ</small>';
             } elseif (strtotime(date('Y-m-d')) >= strtotime($start_intern)) {
-                $badges = '<small class="badge badge  badge-soft-info">กำลังฝึกงาน '.date('Y-m-d').' >= '.$start_intern.'</small>';
+                $badges = '<small class="badge badge  badge-soft-info">กำลังฝึกงาน </small>';
             } else {
                 $badges = '<small class="badge badge  badge-soft-primary">' . $status . '</small>';
             }
@@ -31,21 +31,7 @@
         }
         return $badges;
     }
-    function badgesStatuas($status)
-    {
-        if ($status === 'รอการอนุมัติ') {
-            $badges = '<small class="badge rounded badge-soft-warning false">' . $status . '</small>';
-        } elseif ($status === 'รอดำเนินการ') {
-            $badges = '<small class="badge rounded badge-soft-info false">' . $status . '</small>';
-        } elseif ($status === 'อยู่ระหว่างฝึกงาน') {
-            $badges = '<small class="badge rounded badge-soft-dark false">' . $status . '</small>';
-        } elseif ($status === 'ฝีกงานเรียบร้อย') {
-            $badges = '<small class="badge rounded badge-soft-success false">' . $status . '</small>';
-        } else {
-            $badges = '<small class="badge rounded badge-soft-danger false">' . $status . '</small>';
-        }
-        return $badges;
-    }
+
 @endphp
 
 

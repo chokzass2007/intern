@@ -27,7 +27,7 @@
                                 <th scope="col">รายงานการฝึกงานโดยย่อ</th>
                                 <th scope="col">ระหว่างวันที่</th>
                                 <th scope="col">ถึง</th>
-                                <th scope="col">ดูรายงานย่อฉบับเต็ม</th>
+                                <th scope="col">ดูรายงานฉบับเต็ม</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,7 +37,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="avatar avatar-xl">
                                                 <img class="rounded-circle"
-                                                    src="{{ asset('') }}upload/{{ isset($item->photo) ? $item->photo : 'no_image.jpg' }}"
+                                                    src="{{ asset('') }}upload/{{ isset($item->img) ? $item->img : 'no_image.jpg' }}"
                                                     alt="" />
                                             </div>
                                             <div class="ms-2">{{ $item->company }}</div>
@@ -49,12 +49,9 @@
                                         {{ substr($item->report_from_date, 8, 20) }} นาที</td>
                                     <td class="text-nowrap">{{ Carbon::parse($item->report_to_date)->thaidate('D j M y') }}
                                         เวลา {{ substr($item->report_to_date, 8, 20) }} นาที</td>
-                                    <td class="text-center" style="color:red;">
-                                        <p class="text-red">ยังไม่เปิดให้ใช้</p>
-                                        {{-- <a class="btn btn-link p-0"
-                                            href="{{  $item->id }}" type="button"
-                                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><span
-                                                class="text-500 fas fa-edit"></span></a> --}}
+                                    <td class="text-center" >
+                                        <a class="btn btn-primary view-report btn-sm px-3 m-2 " href="#" data-bs-toggle="modal"
+                                            data-bs-target="#report-modal" data-id="{{$item->idReport}}">ดูรายงาน/แก้ไข</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -62,7 +59,7 @@
                     </table>
                 </div>
             </div>
-            {{-- modal --}}
+            {{-- modal Form --}}
 
             <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
@@ -105,7 +102,8 @@
                                         <div class="form-check mb-0 lh-1">
                                             <input class="form-check-input" type="checkbox" name="i_amOk" value="1"
                                                 id="experience-current"@required(true)>
-                                            <label class="form-check-label mb-0" for="experience-current">ปัจจุบันฉันทำงานที่นี่
+                                            <label class="form-check-label mb-0"
+                                                for="experience-current">ปัจจุบันฉันทำงานที่นี่
                                             </label>
                                         </div>
                                     </div>
@@ -122,9 +120,111 @@
                     </div>
                 </div>
             </div>
+            {{-- End Modal --}}
+            {{-- modal Detail Report --}}
+
+            <div class="modal fade" id="report-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
+                    <div class="modal-content position-relative">
+                        <div class="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
+                            <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-0">
+                            <div class="rounded-top-lg py-3 ps-4 pe-6 bg-light">
+                                <h4 class="mb-1" id="modalExampleDemoLabel">ฟอร์มรายงานประจำวัน </h4>
+                            </div>
+                            <div class="p-4 pb-0">
+                                <form id="form_update_report" method="POST" class="row">
+                                    @csrf
+                                    <div class="col-3 text-lg-end">
+                                        <label class="form-label" for="experience-form2">เวลาเข้างาน </label>
+                                    </div>
+                                    <div class="col-9 col-sm-7 mb-3">
+                                        <input class="form-control datetimepicker" name="report_from_date"
+                                            id="datetimepickerstart" type="text" placeholder="วัน/เดือน/ปี เวลา"
+                                            data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
+                                    </div>
+                                    <div class="col-3 text-lg-end">
+                                        <label class="form-label" for="experience-to">เวลาออกงาน </label>
+                                    </div>
+                                    <div class="col-9 col-sm-7 mb-3">
+                                        <input class="form-control datetimepicker" name="report_to_date"
+                                            id="datetimepickerend" type="text" placeholder="วัน/เดือน/ปี เวลา"
+                                            data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
+                                    </div>
+                                    <div class="col-3 mb-3 text-lg-end">
+                                        <label class="form-label" for="exp-description">รายงานการฝึกงานโดยย่อ </label>
+                                    </div>
+                                    <div class="col-9 col-sm-7 mb-3">
+                                        <textarea class="form-control form-control-sm" name="report_comment" id="exp-descriptionview" rows="3"
+                                            style="height: 291px;"> </textarea>
+                                    </div>
+                                    <div class="col-9 col-sm-7 offset-3 mb-3">
+                                        <div class="form-check mb-0 lh-1">
+                                            <input type="hidden" value="" name="idUpdate" id="idUpdate">
+                                            <input class="form-check-input" type="checkbox" name="i_amOk"
+                                                value="1" id="experience-current"@required(true) checked>
+                                            <label class="form-check-label mb-0"
+                                                for="experience-current">ปัจจุบันฉันทำงานที่นี่
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-9 col-sm-7 offset-3 mb-3">
+                                        <a class="btn btn-primary" id="submit_form">Save</a>
+                                        <button class="btn btn-secondary" type="button"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {{-- End Modal --}}
             {{-- Start footer --}}
         </div>
     </div>
     @include('partials.footer')
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.view-report', function() {
+                const id = $(this).data('id');
+                $('#approve-modal').modal('show');
+                $.ajax({
+                    type: "GET",
+                    url: "{{ URL::current() }}/" + id ,
+                    success: function(reponse) {
+                        document.getElementById("form_update_report").reset();
+                        $('#datetimepickerstart').val(reponse[0].report_from_date);
+                        $('#datetimepickerend').val(reponse[0].report_to_date);
+                        $('#exp-descriptionview').val(reponse[0].report_comment);
+                        $('#idUpdate').val(id);
+                    }
+                });
+            });
+            // Submit Form Approve
+            $(document).on('click', '#submit_form', function() {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "PUT",
+                    url: "{{ URL::current() }}/report_update",
+                    data: $('#form_update_report').serialize(),
+                    success: function(reponse) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

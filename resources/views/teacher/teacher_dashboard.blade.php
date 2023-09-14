@@ -51,18 +51,20 @@
                                     <button class="btn btn-success me-1 mb-1" data-com_id="{{ $item->com_id }}"
                                         value="{{ $item->user_id }}" type="button">อนุมัติ&แก้ไข
                                     </button>
+                                    @if ($item->company_intern == '')
+
+                                    @else
                                     <a class="btn btn-secondary me-1 mb-1" href="{{ route('pdf.no1', $item->user_id) }}"
                                         target=”_blank”>ทดน.1
                                     </a>
-                                    <a class="btn btn-warning me-1 mb-1" href="{{ route('pdf.no1', $item->user_id) }}"
+                                    <a class="btn btn-warning me-1 mb-1" href="{{ route('pdf.no2', $item->user_id) }}"
                                         target=”_blank”>ทดน.2
                                     </a>
                                     <a class="btn btn-info  me-1 mb-1" href="{{ route('pdf.no3', $item->user_id) }}"
                                         target=”_blank”>ทดน.3
                                     </a>
-                                    <a class="btn btn-secondary me-1 mb-1" href="{{ route('pdf.no1', $item->user_id) }}"
-                                        target=”_blank”>ทดน.4
-                                    </a>
+                                    @endif
+
                                     <button class="btn btn-danger me-1 mb-1 btn-danger-input" value="{{ $item->user_id }}"
                                         data-company="{{ $item->com_id }}" data-bs-toggle="modal"
                                         data-bs-target="#cancel">ยกเลิก

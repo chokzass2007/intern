@@ -104,7 +104,7 @@
                                         <form action="{{ route('login') }}" method="POST">
                                             @csrf
                                             <div class="mb-3">
-                                                <x-input-label class="form-label" for="login" :value="__('Username')" />
+                                                <x-input-label class="form-label" for="login" :value="__('Student ID')" />
                                                 <input name="login" class="form-control" id="card-email"
                                                     type="text" />
                                             </div>
