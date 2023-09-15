@@ -17,6 +17,12 @@ class TeacherController extends Controller
     {
         return view('teacher.teacher_dashboard');
     }
+    //Detail Company
+    public function TeacherDetailCompany($id){
+        // dd($id);
+        $data = Company::find($id);
+        return view('teacher.teacher_company', compact('data')) ;
+    }
     // ยกเลิกการฝึกงานกลางคัน (โดยอาจารย์)
     public function TeacherApiCancel(Request $request){
         $request->validate([
@@ -65,6 +71,19 @@ class TeacherController extends Controller
 
 
     } // End Method
+    
+    //  รับเอกสารสำเร็จ
+    public function TeacherApisuccess($com_id,$user_id)
+    {
+        $company = Company::find($com_id);
+        $company->status= 'รอฝึกงาน';
+        $company->save();
+
+        $User = User::find($user_id);
+        $User->status= 'รอฝึกงาน';
+        $User->save();
+    } // End Method
+
     //  เรียกข้อมูลไปแสดงหน้า modal
     public function TeacherApiApprove($id,$ic)
     {
@@ -83,7 +102,7 @@ class TeacherController extends Controller
         $data['company'] = Company::where('id',$ic)->select('id','company')->get();
         return response()->json($data);
     } // End Method
-    
+
     // เรียกข้อมูลไปแสดง/teacher/data
     public function TeacherSelect(Request $request)
     {

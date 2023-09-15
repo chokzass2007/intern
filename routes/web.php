@@ -76,12 +76,15 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     // API
     Route::get('/teacher/data/api/{id}/{ic}',  [TeacherController::class, 'TeacherApiApprove'])->name('teacher.api');
     Route::put('/teacher/data/cancel/',  [TeacherController::class, 'TeacherApiCancel'])->name('teacher.cancel');
+    Route::get('/teacher/data/api/success/{id}/{ic}',  [TeacherController::class, 'TeacherApisuccess']);
     // Approve Intern Teacher
     Route::put('/teacher/data/approve',  [TeacherController::class, 'TeacherApprove'])->name('teacher.approve');
     // PDF Teacher
     Route::get('/teacher/pdf/{id}',  [PDFController::class, 'generatePDF'])->name('pdf.no1');
     Route::get('/teacher/pdf-no2/{id}',  [PDFController::class, 'generatePDFNo2'])->name('pdf.no2');
     Route::get('/teacher/pdf-no3/{id}',  [PDFController::class, 'generatePDFNo3'])->name('pdf.no3');
+    // Detail Company
+    Route::get('/teacher/details/{id}',  [TeacherController::class, 'TeacherDetailCompany'])->name('teacher.detail.company');
 
 }); // End Group Teacher Middleware
 

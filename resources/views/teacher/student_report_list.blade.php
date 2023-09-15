@@ -88,7 +88,7 @@
                                             data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
                                     </div>
                                     <div class="col-3 mb-3 text-lg-end">
-                                        <label class="form-label" for="exp-description">รายงานการฝึกงานโดยย่อ </label>
+                                        <label class="form-label" for="exp-description">รายงานการฝึกงาน </label>
                                     </div>
                                     <div class="col-9 col-sm-7 mb-3">
                                         <textarea class="form-control form-control-sm" name="report_comment" id="exp-description" rows="3" style="height: 291px;"> </textarea>

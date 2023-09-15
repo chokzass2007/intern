@@ -1,6 +1,29 @@
 @php
     use Illuminate\Support\Carbon;
+
+    function badgesStatus($status, $end_intern, $start_intern)
+    {
+        if ($status === 'รออาจารย์อนุมัติ') {
+            $badges = '<small class="badge badge  badge-soft-secondary">' . $status . '</small>';
+        } elseif ($status === 'รอดำเนินการยื่นเรื่องฝึกงาน') {
+            $badges = '<small class="badge badge  badge-soft-warning">' . $status . '</small>';
+        } elseif ($status === 'รอฝึกงาน') {
+            if (strtotime(date('Y-m-d')) > strtotime($end_intern)) {
+                $badges = '<small class="badge badge  badge-soft-success">ฝึกงานสำเร็จ</small>';
+            } elseif (strtotime(date('Y-m-d')) >= strtotime($start_intern)) {
+                $badges = '<small class="badge badge  badge-soft-info">กำลังฝึกงาน</small>';
+            } else {
+                $badges = '<small class="badge badge  badge-soft-primary">' . $status . '</small>';
+            }
+        } elseif ($status === 'ฝีกงานเรียบร้อย') {
+            $badges = '<small class="badge badge  badge-soft-success">' .$status. '</small>';
+        } else {
+            $badges = '<small class="badge badge  badge-soft-danger">' .$status. '</small>';
+        }
+        return $badges;
+    }
 @endphp
+{{-- @include('layouts.function') --}}
 @extends('layouts.layout')
 @section('main-content')
     <div class="card-body position-relative">
@@ -12,12 +35,12 @@
             <div class="row flex-between-center">
                 <div class="col-auto">
                     <a class="btn btn-primary  btn-sm px-3 m-2 " href="{{ url('/') }}">ย้อนกลับ</a>
-                    @if ($profileData->company_intern != '')
-                        <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                            data-bs-target="#error-modal">ฟอร์มรายงานประจำวัน</button>
-                    @else
-                        <span style="color: red">ยังไม่มีบริษัทฝึกงาน</span>
-                    @endif
+                    @if (badgesStatus($profileData->status, $profileData->end_intern, $profileData->start_intern) === '<small class="badge badge  badge-soft-info">กำลังฝึกงาน</small>')
+                    <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                        data-bs-target="#error-modal">ฟอร์มรายงานประจำวัน</button>
+                @else
+                    <span style="color: red">ยังไม่มีบริษัทฝึกงาน</span>
+                @endif
                 </div>
                 <div class="table-responsive scrollbar">
                     <table class="table table-hover table-striped overflow-hidden">
@@ -92,7 +115,7 @@
                                             data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
                                     </div>
                                     <div class="col-3 mb-3 text-lg-end">
-                                        <label class="form-label" for="exp-description">รายงานการฝึกงานโดยย่อ </label>
+                                        <label class="form-label" for="exp-description">รายงานการฝึกงาน </label>
                                     </div>
                                     <div class="col-9 col-sm-7 mb-3">
                                         <textarea class="form-control form-control-sm" name="report_comment" id="exp-description" rows="3"
@@ -154,7 +177,7 @@
                                             data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
                                     </div>
                                     <div class="col-3 mb-3 text-lg-end">
-                                        <label class="form-label" for="exp-description">รายงานการฝึกงานโดยย่อ </label>
+                                        <label class="form-label" for="exp-description">รายงานการฝึกงาน </label>
                                     </div>
                                     <div class="col-9 col-sm-7 mb-3">
                                         <textarea class="form-control form-control-sm" name="report_comment" id="exp-descriptionview" rows="3"

@@ -40,29 +40,36 @@
                                                 alt="" />
                                         </div>
                                         <div class="ms-2">{{ substr($item->company, 0, 100) }}</div>
+                                        <a class="btn btn-info  ms-2 mb-1"
+                                            href="{{ route('teacher.detail.company', $item->com_id) }}"
+                                            target=”_blank”>ข้อมูลบริษัท
+                                        </a>
                                     </div>
                                 </td>
                                 <td class="text-nowrap">{{ $item->bossName }}</td>
-                                <td>{!! statusCompany($item->status,$item->start_intern,$item->end_intern) !!}</td>
-
+                                <td>{!! statusCompany($item->status, $item->start_intern, $item->end_intern) !!}</td>
                             </tr>
                             <tr>
                                 <td class="text-nowrap text-center" colspan="5">
-                                    <button class="btn btn-success me-1 mb-1" data-com_id="{{ $item->com_id }}"
-                                        value="{{ $item->user_id }}" type="button">อนุมัติ&แก้ไข
+                                    <button class="btn btn-success btn-successApprove me-1 mb-1"
+                                        data-com_id="{{ $item->com_id }}" value="{{ $item->user_id }}"
+                                        type="button">อนุมัติ&แก้ไข
                                     </button>
                                     @if ($item->company_intern == '')
-
                                     @else
-                                    <a class="btn btn-secondary me-1 mb-1" href="{{ route('pdf.no1', $item->user_id) }}"
-                                        target=”_blank”>ทดน.1
-                                    </a>
-                                    <a class="btn btn-warning me-1 mb-1" href="{{ route('pdf.no2', $item->user_id) }}"
-                                        target=”_blank”>ทดน.2
-                                    </a>
-                                    <a class="btn btn-info  me-1 mb-1" href="{{ route('pdf.no3', $item->user_id) }}"
-                                        target=”_blank”>ทดน.3
-                                    </a>
+                                        <button class="btn btn-primary  me-1 mb-1 documentsuccess"
+                                            data-com_id="{{ $item->com_id }}" data-user_id="{{ $item->user_id }}"
+                                            type="button">รับเอกสารสำเร็จ
+                                        </button>
+                                        <a class="btn btn-secondary me-1 mb-1"
+                                            href="{{ route('pdf.no1', $item->user_id) }}" target=”_blank”>ทดน.1
+                                        </a>
+                                        <a class="btn btn-warning me-1 mb-1" href="{{ route('pdf.no2', $item->user_id) }}"
+                                            target=”_blank”>ทดน.2
+                                        </a>
+                                        <a class="btn btn-info  me-1 mb-1" href="{{ route('pdf.no3', $item->user_id) }}"
+                                            target=”_blank”>ทดน.3
+                                        </a>
                                     @endif
 
                                     <button class="btn btn-danger me-1 mb-1 btn-danger-input" value="{{ $item->user_id }}"
@@ -136,7 +143,7 @@
                 </div>
             </div>
         @endif
-        {{-- modal Approve--}}
+        {{-- modal Approve --}}
 
         <div class="modal fade" id="approve-modal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
@@ -182,7 +189,7 @@
                                 <div class="col-9 col-sm-7 offset-3 mb-3">
                                     <div class="form-check mb-0 lh-1">
                                         <input class="form-check-input" type="checkbox" name="status"
-                                            value="รอฝึกงาน" id="experience-current" required>
+                                            value="ติดต่อรับเอกสารฝึกงาน" id="experience-current" required>
                                         <label class="form-check-label mb-0"
                                             for="experience-current">อนุมัติการฝึกงานที่นี้
                                         </label>
@@ -193,7 +200,7 @@
                                 </div>
 
                                 <div class="col-9 col-sm-7 offset-3 mb-3">
-                                    <a class="btn btn-primary" id="submit_form" >ยืนยัน</a>
+                                    <a class="btn btn-primary" id="submit_form">ยืนยัน</a>
                                     <button class="btn btn-secondary" type="button"
                                         data-bs-dismiss="modal">ยกเลิก</button>
                                 </div>
@@ -218,7 +225,7 @@
                             <input type="hidden" id="com_id_cal" name="com_id">
                             <input type="hidden" id="user_id_cal" name="user_id">
                             <textarea class="form-control form-control-sm" name="report_cal" id="exp-description" rows="2"
-                                style="height: 291px;"  required=""> </textarea>
+                                style="height: 291px;" required=""> </textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ไม่ ยกเลิก</button>
@@ -242,10 +249,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     // Open Form
-    $(document).on('click', '.btn-success', function() {
+    $(document).on('click', '.btn-successApprove', function() {
         const id = $(this).val();
         let com_id = $(this).data('com_id')
-        // alert('userId'+id +'comId'+com_id);
         $('#approve-modal').modal('show');
         $.ajax({
             type: "GET",
@@ -261,6 +267,54 @@
             }
         });
     });
+    //
+    $(document).on('click', '.documentsuccess', function() {
+        let com_id = $(this).data('com_id');
+        let user_id = $(this).data('user_id');
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'ms-1 btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'นักศึกษามารับเอกสารเรียบร้อยแล้ว ?',
+            text: "คุณยืนยันว่านักศึกษามารับเอกสารแล้ว!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ URL::current() }}/api/success/" + com_id + "/" + user_id,
+                    success: function(reponse) {
+                        window.location.reload(1);
+                          swalWithBootstrapButtons.fire(
+                    'ยืนยัน !',
+                    'นักศึกษามารับเอกสารเรียบร้อยแล้ว',
+                    'success'
+                )
+                    }
+                });
+
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'ยกเลิก',
+                    'นักศึกษายังไม่ได้มารับเอกสาร :)',
+                    'error'
+                )
+            }
+        })
+
+    });
     // cancel Intern
     $(document).on('click', '.btn-danger-input', function() {
         let id = $(this).val();
@@ -271,8 +325,8 @@
 
     // Submit Form Approve
     $(document).on('click', '#submit_form', function() {
-        let check = $('#experience-current').prop( "checked");
-        if(check == false){
+        let check = $('#experience-current').prop("checked");
+        if (check == false) {
             alert('กรุณายืนยันการอนุมัติการฝึกงานที่นี้')
             return;
         }

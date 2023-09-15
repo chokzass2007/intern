@@ -87,7 +87,13 @@ $profileData = App\Models\User::find($id);
                     <img src="{{ asset('assets/img/icons/spot-illustrations/01.jpg')}}" alt="" width="100" />
                     {{-- <img src="{{ Storage::url('upload/202308260325202308130414IMG20230808113955.jpg')}}" alt="" width="100" /> --}}
                     {{-- <p class="fs-0 mt-2">อ.ชนินทร เฉลิมสุข</p> --}}
-                    <div class="d-grid"><a class=" mt-2 btn btn-sm btn-purchase" href="https://www.facebook.com/chanintorn.comsci" target="_blank">อ.ชนินทร เฉลิมสุข</a></div>
+                    <div class="d-grid">
+                        <a class=" mt-2 btn btn-sm btn-purchase" href="https://www.facebook.com/chanintorn.comsci" target="_blank">อ.ชนินทร เฉลิมสุข</a>
+                    <label for="" class="mt-2">อาจารย์ผู้ดูแลนักศึกษาฝึกงาน
+                        <br>เบอร์โทรติดต่อ
+                        <br><a href="tel:064-170-0888">064-170-0888</a>
+                    </label>
+                    </div>
                   </div>
                 </div>
               </div>

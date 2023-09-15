@@ -9,29 +9,7 @@
     }else {
        $profileData = User::where('users.id',$id)->join('companies','users.company_intern','=','companies.id')->get();
     }
-
-    function badgesStatus($status, $end_intern, $start_intern)
-    {
-        if ($status === 'รออาจารย์อนุมัติ') {
-            $badges = '<small class="badge badge  badge-soft-secondary">' . $status . '</small>';
-        } elseif ($status === 'รอดำเนินการยื่นเรื่องฝึกงาน') {
-            $badges = '<small class="badge badge  badge-soft-warning">' . $status . '</small>';
-        } elseif ($status === 'รอฝึกงาน') {
-            if (strtotime(date('Y-m-d')) > strtotime($end_intern)) {
-                $badges = '<small class="badge badge  badge-soft-success">ฝึกงานสำเร็จ</small>';
-            } elseif (strtotime(date('Y-m-d')) >= strtotime($start_intern)) {
-                $badges = '<small class="badge badge  badge-soft-info">กำลังฝึกงาน </small>';
-            } else {
-                $badges = '<small class="badge badge  badge-soft-primary">' . $status . '</small>';
-            }
-        } elseif ($status === 'ฝีกงานเรียบร้อย') {
-            $badges = '<small class="badge badge  badge-soft-success">' . $status . '</small>';
-        } else {
-            $badges = '<small class="badge badge  badge-soft-danger">' . $status . '</small>';
-        }
-        return $badges;
-    }
-
+    
 @endphp
 
 
@@ -128,7 +106,7 @@
                                 <h6 class="mb-0">ChangePassword</h6>
                             </div>
                         </a>
-                        @if (isset($profileData[0]->company_intern))
+                        @if (badgesStatus($profileData[0]->status, $profileData[0]->end_intern, $profileData[0]->start_intern) === '<small class="badge badge  badge-soft-info">กำลังฝึกงาน</small>')
                             <button class="btn btn-success" type="button" data-bs-toggle="modal"
                                 data-bs-target="#error-modal">ฟอร์มรายงานประจำวัน</button>
                         @else
@@ -171,7 +149,7 @@
                                         data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
                                 </div>
                                 <div class="col-3 mb-3 text-lg-end">
-                                    <label class="form-label" for="exp-description">รายงานการฝึกงานโดยย่อ </label>
+                                    <label class="form-label" for="exp-description">รายงานการฝึกงาน </label>
                                 </div>
                                 <div class="col-9 col-sm-7 mb-3">
                                     <textarea class="form-control form-control-sm" name="report_comment" id="exp-description" rows="3"

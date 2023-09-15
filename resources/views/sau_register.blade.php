@@ -115,7 +115,7 @@
                                             @csrf
                                             <div class="row gx-2">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="idStudent">รหัสนักศึกษา</label>
+                                                    <label class="form-label" for="idStudent">รหัสนักศึกษา<span class="text-danger ms-1">*</span></label>
                                                     <input class="form-control" type="text" autocomplete="on"
                                                         name="idStudent" id="idStudent" required="" />
                                                     @error('idStudent')
@@ -125,18 +125,19 @@
                                                 </div>
 
                                                 <div class="mb-3 col-sm-6">
-                                                    <label class="form-label" for="name">ชื่อ</label>
+                                                    <label class="form-label" for="name">ชื่อ<span class="text-danger ms-1">*</span></label>
                                                     <input class="form-control" type="text" autocomplete="on"
                                                         name="fName" id="name" required="" />
                                                     <div class="invalid-feedback">กรุณา กรอกชื่อ</div>
                                                 </div>
                                                 <div class="mb-3 col-sm-6">
-                                                    <label class="form-label" for="last-name">นามสกุล</label>
+                                                    <label class="form-label" for="last-name">นามสกุล<span class="text-danger ms-1">*</span></label>
                                                     <input class="form-control" type="text" autocomplete="on"
                                                         name="lName" id="last-name" required="" />
                                                     <div class="invalid-feedback">กรุณา กรอกนามสกุล</div>
                                                 </div>
                                                 <div class="d-flex mb-3 flex-row">
+                                                    <span>คำนำหน้า : </span>
                                                     <input class="form-check-input ms-2" id="flexRadioDefault1"
                                                         type="radio" name="sex" value="นาย"
                                                          required/>
@@ -153,7 +154,7 @@
                                                         for="flexRadioDefault3">นาง</label>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="card-email">อีเมล์</label>
+                                                    <label class="form-label" for="card-email">อีเมล์<span class="text-danger ms-1">*</span></label>
                                                     <input class="form-control" type="email" autocomplete="on"
                                                         name="email" id="card-email" required="" />
                                                     @error('email')
@@ -163,7 +164,7 @@
                                                 </div>
                                                 <div class="row gx-2">
                                                     <div class="mb-3 col-sm-6">
-                                                        <label class="form-label" for="card-password">Password</label>
+                                                        <label class="form-label" for="card-password">Password<span class="text-danger ms-1">*</span></label>
                                                         <input class="form-control" type="password" autocomplete="on"
                                                             name="password" id="card-password" min="8" required="" />
                                                         <div class="invalid-feedback">กรุณา Password</div>
@@ -174,7 +175,7 @@
                                                     </div>
                                                     <div class="mb-3 col-sm-6">
                                                         <label class="form-label" for="card-confirm-password">Confirm
-                                                            Password</label>
+                                                            Password<span class="text-danger ms-1">*</span></label>
                                                         <input class="form-control" type="password" autocomplete="on"
                                                             name="password_confirmation" id="card-confirm-password"
                                                             min="8" required="" />
@@ -183,7 +184,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="major">สาขา</label>
+                                                    <label class="form-label" for="major">สาขา<span class="text-danger ms-1">*</span></label>
                                                     <select class="form-select" name="major" id="major" aria-label="Default select example" required>
                                                         <option value="">กรุณา เลือกสาขา</option>
                                                         <option value="เทคโนโลยีดิจิทัลและนวัตกรรม">เทคโนโลยีดิจิทัลและนวัตกรรม</option>
@@ -193,13 +194,13 @@
                                                     <div class="invalid-feedback">กรุณา เลือกสาขา</div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="phone">เบอร์โทร</label>
+                                                    <label class="form-label" for="phone">เบอร์โทร<span class="text-danger ms-1">*</span></label>
                                                     <input class="form-control" type="text" autocomplete="on"
                                                         name="phone" id="phone" required="" />
                                                     <div class="invalid-feedback">กรุณา กรอกเบอร์โทร</div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="phone">รูป</label>
+                                                    <label class="form-label" for="phone">รูป<span class="text-danger ms-1">*</span></label>
                                                     <input class="form-control" name="photo" type="file"
                                                         id="image" accept="image/png, image/gif, image/jpeg"
                                                         required="" />

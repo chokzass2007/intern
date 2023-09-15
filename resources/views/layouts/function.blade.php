@@ -21,4 +21,26 @@
         }
         return $badges;
     }
+
+     function badgesStatus($status, $end_intern, $start_intern)
+    {
+        if ($status === 'รออาจารย์อนุมัติ') {
+            $badges = '<small class="badge badge  badge-soft-secondary">' . $status . '</small>';
+        } elseif ($status === 'รอดำเนินการยื่นเรื่องฝึกงาน') {
+            $badges = '<small class="badge badge  badge-soft-warning">' . $status . '</small>';
+        } elseif ($status === 'รอฝึกงาน') {
+            if (strtotime(date('Y-m-d')) > strtotime($end_intern)) {
+                $badges = '<small class="badge badge  badge-soft-success">ฝึกงานสำเร็จ</small>';
+            } elseif (strtotime(date('Y-m-d')) >= strtotime($start_intern)) {
+                $badges = '<small class="badge badge  badge-soft-info">กำลังฝึกงาน</small>';
+            } else {
+                $badges = '<small class="badge badge  badge-soft-primary">' . $status . '</small>';
+            }
+        } elseif ($status === 'ฝีกงานเรียบร้อย') {
+            $badges = '<small class="badge badge  badge-soft-success">' .$status. '</small>';
+        } else {
+            $badges = '<small class="badge badge  badge-soft-danger">' .$status. '</small>';
+        }
+        return $badges;
+    }
 @endphp
