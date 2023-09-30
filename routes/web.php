@@ -77,6 +77,7 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::get('/teacher/data/api/{id}/{ic}',  [TeacherController::class, 'TeacherApiApprove'])->name('teacher.api');
     Route::put('/teacher/data/cancel/',  [TeacherController::class, 'TeacherApiCancel'])->name('teacher.cancel');
     Route::get('/teacher/data/api/success/{id}/{ic}',  [TeacherController::class, 'TeacherApisuccess']);
+    Route::get('/teacher/data/api/view-detail/{id}/{ic}',  [TeacherController::class, 'TeacherApiViewReportStudent']);
     // Approve Intern Teacher
     Route::put('/teacher/data/approve',  [TeacherController::class, 'TeacherApprove'])->name('teacher.approve');
     // PDF Teacher

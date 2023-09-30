@@ -39,7 +39,7 @@
                                                 src="{{ asset('') }}upload/{{ isset($item->img) ? $item->img : 'no_image.jpg' }}"
                                                 alt="" />
                                         </div>
-                                        <div class="ms-2">{{ substr($item->company, 0, 100) }}</div>
+                                        <div class="ms-2">{{ substr($item->company, 0, 50) }}</div>
                                         <a class="btn btn-info  ms-2 mb-1"
                                             href="{{ route('teacher.detail.company', $item->com_id) }}"
                                             target=”_blank”>ข้อมูลบริษัท
@@ -70,6 +70,11 @@
                                         <a class="btn btn-info  me-1 mb-1" href="{{ route('pdf.no3', $item->user_id) }}"
                                             target=”_blank”>ทดน.3
                                         </a>
+                                        <button class="btn btn-primary  me-1 mb-1 view-report-student"
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                            data-com_id="{{ $item->com_id }}" data-user_id="{{ $item->user_id }}"
+                                            type="button">รายงานนักศึกษา
+                                        </button>
                                     @endif
 
                                     <button class="btn btn-danger me-1 mb-1 btn-danger-input" value="{{ $item->user_id }}"
@@ -212,6 +217,51 @@
             </div>
         </div>
 
+        {{-- modal report student --}}
+        <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg mt-6" role="document">
+                <div class="modal-content border-0">
+                    <div class="position-absolute top-0 end-0 mt-3 me-3 z-index-1"><button
+                            class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
+                            data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body p-0">
+                        <div class="bg-light rounded-top-lg py-3 ps-4 pe-6">
+                            <h4 class="mb-1" id="staticBackdropLabel">Add a new illustration to the landing page</h4>
+                            <p class="fs--2 mb-0">Added by <a class="link-600 fw-semi-bold" href="#!">Antony</a></p>
+                        </div>
+                        <div class="p-4">
+                            <table class="table table-hover table-striped overflow-hidden">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">บริษัท</th>
+                                        <th scope="col">รายงานการฝึกงานโดยย่อ</th>
+                                        <th scope="col">ระหว่างวันที่</th>
+                                        <th scope="col">ถึง</th>
+                                        <th scope="col">ดูรายงานฉบับเต็ม</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-report">
+
+                                </tbody>
+                            </table>
+                            <div class="col-auto"><button class="btn btn-secondary m-1" type="button"
+                                    data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top"
+                                    data-bs-content="Top1 Popover">Top Popover</button>
+                            </div>
+                            <div class="col-auto"><button class="btn btn-secondary m-1" type="button"
+                                    data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top"
+                                    data-bs-content="Top2 Popover">Top Popover</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- End report stdent --}}
+
+
+
         <!-- Modal Cancel-->
         <div class="modal fade" id="cancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -236,6 +286,9 @@
             </div>
         </div>
 
+        {{--
+
+         --}}
 
         {{-- Start footer --}}
     </div>
@@ -267,7 +320,7 @@
             }
         });
     });
-    //
+    // ยืนยันรับเอกสารแล้ว
     $(document).on('click', '.documentsuccess', function() {
         let com_id = $(this).data('com_id');
         let user_id = $(this).data('user_id');
@@ -294,11 +347,11 @@
                     url: "{{ URL::current() }}/api/success/" + com_id + "/" + user_id,
                     success: function(reponse) {
                         window.location.reload(1);
-                          swalWithBootstrapButtons.fire(
-                    'ยืนยัน !',
-                    'นักศึกษามารับเอกสารเรียบร้อยแล้ว',
-                    'success'
-                )
+                        swalWithBootstrapButtons.fire(
+                            'ยืนยัน !',
+                            'นักศึกษามารับเอกสารเรียบร้อยแล้ว',
+                            'success'
+                        )
                     }
                 });
 
@@ -314,6 +367,49 @@
             }
         })
 
+    });
+    // view port student
+    $(document).on('click', '.view-report-student', function() {
+        let com_id = $(this).data('com_id');
+        let user_id = $(this).data('user_id');
+
+        $.ajax({
+            type: "GET",
+            url: "{{ URL::current() }}/api/view-detail/" + com_id + "/" + user_id,
+            success: function(reponse) {
+                $('#tbody-report').empty();
+                let element = '';
+
+                reponse.forEach(reponse => {
+                    element = ` <tr class="align-middle">
+                                    <td class="text-nowrap">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar avatar-xl">
+                                                <img class="rounded-circle"
+                                                    src="{{ asset('') }}upload/${(reponse.img == ' ')? reponse.img : 'no_image.jpg'}"
+                                                    alt="" />
+                                            </div>
+                                            <div class="ms-2">${reponse.company}</div>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"></td>
+                                    <td class="text-nowrap">
+                                         เวลา
+                                         นาที</td>
+                                    <td class="text-nowrap">
+                                        เวลา  นาที</td>
+                                    <td class="text-center" >
+                                        <div class="col-auto"><button class="btn btn-secondary m-1" type="button"
+                                                data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top"
+                                                data-bs-content="Top Popover">Top Popover</button></div>
+                                    </td>
+                                </tr>`;
+                });
+                // ปุ่ม Popover ใช้งานไม่ได้
+                $('#tbody-report').append(element);
+
+            }
+        });
     });
     // cancel Intern
     $(document).on('click', '.btn-danger-input', function() {
