@@ -140,7 +140,7 @@
                                         </div>
                                         <div class="col-9 col-sm-7 mb-3">
                                             <input class="form-control" name="photo" type="file" id="image"
-                                                accept="image/png, image/gif, image/jpeg" />
+                                                accept="image/png, image/gif, image/jpeg"required />
                                         </div>
                                         <div class="col-3 mb-3 text-lg-end">
                                             <label class="form-label" for="phone">รูป</label>

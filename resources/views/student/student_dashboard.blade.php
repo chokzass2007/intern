@@ -9,7 +9,7 @@
     }else {
        $profileData = User::where('users.id',$id)->join('companies','users.company_intern','=','companies.id')->get();
     }
-    
+
 @endphp
 
 
@@ -149,7 +149,7 @@
                                         data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
                                 </div>
                                 <div class="col-3 mb-3 text-lg-end">
-                                    <label class="form-label" for="exp-description">รายงานการฝึกงาน </label>
+                                    <label class="form-label" for="exp-description">รายงานการฝึกงานประจำวัน </label>
                                 </div>
                                 <div class="col-9 col-sm-7 mb-3">
                                     <textarea class="form-control form-control-sm" name="report_comment" id="exp-description" rows="3"
@@ -160,7 +160,7 @@
                                         <input class="form-check-input" type="checkbox" name="i_amOk" value="1"
                                             id="experience-current" required>
                                         <label class="form-check-label mb-0"
-                                            for="experience-current">ปัจจุบันฉันทำงานที่นี่
+                                            for="experience-current">ปัจจุบันฉันฝึกงานที่นี่
                                         </label>
                                     </div>
                                 </div>

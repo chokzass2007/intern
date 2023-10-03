@@ -40,10 +40,6 @@
                                                 alt="" />
                                         </div>
                                         <div class="ms-2">{{ substr($item->company, 0, 50) }}</div>
-                                        <a class="btn btn-info  ms-2 mb-1"
-                                            href="{{ route('teacher.detail.company', $item->com_id) }}"
-                                            target=”_blank”>ข้อมูลบริษัท
-                                        </a>
                                     </div>
                                 </td>
                                 <td class="text-nowrap">{{ $item->bossName }}</td>
@@ -51,6 +47,10 @@
                             </tr>
                             <tr>
                                 <td class="text-nowrap text-center" colspan="5">
+                                    <a class="btn btn-info  ms-2 mb-1"
+                                        href="{{ route('teacher.detail.company', $item->com_id) }}"
+                                        target=”_blank”>ข้อมูลบริษัท
+                                    </a>
                                     <button class="btn btn-success btn-successApprove me-1 mb-1"
                                         data-com_id="{{ $item->com_id }}" value="{{ $item->user_id }}"
                                         type="button">อนุมัติ&แก้ไข

@@ -115,9 +115,9 @@
                                             @csrf
                                             <div class="row gx-2">
                                                 <div class="mb-3">
-                                                    <label class="form-label" for="idStudent">รหัสนักศึกษา<span class="text-danger ms-1">*</span></label>
+                                                    <label class="form-label" for="idStudent">รหัสนักศึกษา<span class="text-danger ms-1">* ไม่มี S นำหน้า</span></label>
                                                     <input class="form-control" type="text" autocomplete="on"
-                                                        name="idStudent" id="idStudent" required="" />
+                                                        name="idStudent" id="idStudent" required="" placeholder="ตัวอย่างเช่น  6552D10015" />
                                                     @error('idStudent')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror

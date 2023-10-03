@@ -42,7 +42,7 @@ use Illuminate\Support\Carbon;
         /** Define the margins of your page **/
         @page {
             margin: 100px 25px;
-            size: auto; 
+            size: auto;
             size: A4 portrait;
         }
 
@@ -93,14 +93,14 @@ use Illuminate\Support\Carbon;
     </header>
 
     {{-- <footer>
-        Copyright &copy; 
+        Copyright &copy;
     </footer> --}}
 
     <!-- Wrap the content of your PDF inside a main tag -->
         <div class="content">
             <p >ที่ ทดน.พิเศษ(ส) 101/{{thaidate(' Y', date('Y'));}} <br> </p>
-                
-                                                         <p style="text-indent: 27em;">{{thaidate(' j F Y', date('d-m-Y'));}}</p> 
+
+                                                         <p style="text-indent: 27em;">{{thaidate(' j F Y', date('d-m-Y'));}}</p>
                 <table >
                     <tr>
                         <td>เรื่อง  ขอส่งตัวนักศึกษาฝึกประสบการณ์วิชาชีพ</td>
@@ -115,8 +115,8 @@ use Illuminate\Support\Carbon;
                             <p style="line-height: 15px;text-indent: 5em;">    สาขาวิชาเทคโนโลยีดิจิทัลและนวัตกรรม คณะศิลปศาสตร์และวิทยาศาสตร์ ขอส่งตัว
                                 {{$data[0]->sex}}  {{$data[0]->fName}} {{$data[0]->lName}} นักศึกษาสาขาวิชาเทคโนโลยีดิจิทัลและนวัตกรรม เข้ารับการฝึกงาน ณ บริษัท
                         {{$data[0]->comName}} จำกัด</p>
-                       <p style="text-indent: 8em;">จึงเรียนมาเพื่อโปรดทราบและขอขอบคุณเป็นอย่างยิ่ง</p> 
-                    
+                       <p style="text-indent: 8em;">จึงเรียนมาเพื่อโปรดทราบและขอขอบคุณเป็นอย่างยิ่ง</p>
+
                 <div class="approve">
                     <table style="text-align: center">
                         <tr>
@@ -139,8 +139,6 @@ use Illuminate\Support\Carbon;
                         </tr>
                     </table>
                 </div>
-                <br>
-                <br>
                 <br>
                 <br>
                 <div>
