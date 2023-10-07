@@ -367,49 +367,7 @@
         })
 
     });
-    // view port student
-    $(document).on('click', '.view-report-student', function() {
-        let com_id = $(this).data('com_id');
-        let user_id = $(this).data('user_id');
-
-        $.ajax({
-            type: "GET",
-            url: "{{ URL::current() }}/api/view-detail/" + com_id + "/" + user_id,
-            success: function(reponse) {
-                $('#tbody-report').empty();
-                let element = '';
-
-                reponse.forEach(reponse => {
-                    element = ` <tr class="align-middle">
-                                    <td class="text-nowrap">
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar avatar-xl">
-                                                <img class="rounded-circle"
-                                                    src="{{ asset('') }}upload/${(reponse.img == ' ')? reponse.img : 'no_image.jpg'}"
-                                                    alt="" />
-                                            </div>
-                                            <div class="ms-2">${reponse.company}</div>
-                                        </div>
-                                    </td>
-                                    <td class="text-nowrap"></td>
-                                    <td class="text-nowrap">
-                                         เวลา
-                                         นาที</td>
-                                    <td class="text-nowrap">
-                                        เวลา  นาที</td>
-                                    <td class="text-center" >
-                                        <div class="col-auto"><button class="btn btn-secondary m-1" type="button"
-                                                data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top"
-                                                data-bs-content="Top Popover">Top Popover</button></div>
-                                    </td>
-                                </tr>`;
-                });
-                // ปุ่ม Popover ใช้งานไม่ได้
-                $('#tbody-report').append(element);
-
-            }
-        });
-    });
+   
     // cancel Intern
     $(document).on('click', '.btn-danger-input', function() {
         let id = $(this).val();
