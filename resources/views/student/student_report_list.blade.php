@@ -66,12 +66,12 @@
                                             <div class="ms-2">{{ $item->company }}</div>
                                         </div>
                                     </td>
-                                    <td class="text-nowrap">{{ substr($item->report_comment, 0, 40) }}</td>
+                                    <td class="text-nowrap">{{ mb_substr($item->report_comment, 0, 40,'utf8') }}</td>
                                     <td class="text-nowrap">
                                         {{ Carbon::parse($item->report_from_date)->thaidate('D j M y') }} เวลา
-                                        {{ substr($item->report_from_date, 8, 20) }} นาที</td>
+                                        {{ mb_substr($item->report_from_date, 8, 20,'utf8') }} นาที</td>
                                     <td class="text-nowrap">{{ Carbon::parse($item->report_to_date)->thaidate('D j M y') }}
-                                        เวลา {{ substr($item->report_to_date, 8, 20) }} นาที</td>
+                                        เวลา {{ mb_substr($item->report_to_date, 8, 20,'utf8') }} นาที</td>
                                     <td class="text-center" >
                                         <a class="btn btn-primary view-report btn-sm px-3 m-2 " href="#" data-bs-toggle="modal"
                                             data-bs-target="#report-modal" data-id="{{$item->idReport}}">ดูรายงาน/แก้ไข</a>

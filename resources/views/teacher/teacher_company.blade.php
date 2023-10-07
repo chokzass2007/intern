@@ -12,7 +12,7 @@
                         <div class="card h-100">
                             <div class="card-header">
                                 <h5 class="mb-0">บริษัทฝึกงาน</h5>
-                                <a class="btn btn-primary  btn-sm px-3 mt-2 " href="{{ url('/') }}">ย้อนกลับ</a>
+                                <a class="btn btn-primary  btn-sm px-3 mt-2 "  href="javascript:window.close()">ย้อนกลับ</a>
                             </div>
                             <div class="card-body bg-light pb-0"><a class="mb-4 d-block d-flex align-items-center"
                                     href="#experience-form" data-bs-toggle="collapse" aria-expanded="true"

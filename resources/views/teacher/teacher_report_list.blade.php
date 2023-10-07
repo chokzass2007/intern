@@ -64,10 +64,9 @@
                                     {{-- สร้าง div กำหนดขนาดของกล่องถ้าข้อความยาวให้ขึ้นบรรทัดใหม่ --}}
                                     <td  class="text-nowrap">
                                         {{ Carbon::parse($item->report_from_date)->thaidate('D j M y') }} เวลา
-                                        {{ substr($item->report_from_date, 8, 20) }} นาที</td>
+                                        {{ mb_substr($item->report_from_date, 8, 20,'utf8') }} นาที</td>
                                     <td class="text-nowrap">{{ Carbon::parse($item->report_to_date)->thaidate('D j M y') }}
-                                        เวลา {{ substr($item->report_to_date, 8, 20) }} นาที</td>
-
+                                        เวลา {{ mb_substr($item->report_to_date, 8, 20,'utf8') }} นาที</td>
                                 </tr>
                             @endforeach
                         </tbody>
