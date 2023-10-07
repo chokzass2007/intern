@@ -57,7 +57,7 @@
                                                     src="{{ asset('') }}upload/{{ isset($item->img) ? $item->img : 'no_image.jpg' }}"
                                                     alt="" />
                                             </div>
-                                            <div class="ms-2">{{ $item->company }}</div>
+                                            <div class="ms-2">{{ mb_substr( $item->company, 8, 30,'utf8')}}</div>
                                         </div>
                                     </td>
                                     <td>
