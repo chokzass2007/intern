@@ -73,12 +73,13 @@ class TeacherController extends Controller
     } // End Method
 
     //  view report Student
-    public function TeacherApiViewReportStudent($com_id,$user_id)
+    public function TeacherViewReportStudent($com_id,$user_id)
     {
         $data = Report::where('auth_id',$user_id)->where( 'com_id',$com_id)->join('companies', 'reports.com_id', '=', 'companies.id')
         ->select('companies.*','reports.id AS idReport','reports.*')->get();
         // dd($data);
-        return response()->json($data);
+        return  view('teacher.teacher_report_list', compact('data'));
+
     } // End Method
     //  รับเอกสารสำเร็จ
     public function TeacherApisuccess($com_id,$user_id)

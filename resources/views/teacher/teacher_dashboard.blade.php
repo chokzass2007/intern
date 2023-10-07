@@ -70,11 +70,10 @@
                                         <a class="btn btn-info  me-1 mb-1" href="{{ route('pdf.no3', $item->user_id) }}"
                                             target=”_blank”>ทดน.3
                                         </a>
-                                        <button class="btn btn-primary  me-1 mb-1 view-report-student"
-                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                            data-com_id="{{ $item->com_id }}" data-user_id="{{ $item->user_id }}"
-                                            type="button">รายงานนักศึกษา
-                                        </button>
+                                        <a class="btn btn-primary  me-1 mb-1"
+                                            href="{{ route('teacher.view.report', ['user_id' => $item->user_id, 'com_id' => $item->com_id]) }}"
+                                            target=”_blank”>รายงานนักศึกษา
+                                        </a>
                                     @endif
 
                                     <button class="btn btn-danger me-1 mb-1 btn-danger-input" value="{{ $item->user_id }}"
