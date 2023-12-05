@@ -66,7 +66,7 @@
                                     <td class="p-1 text-start" style="width: 25%;">ฝึกงานที่ :</td>
                                     <td class="p-1"><a class="text-600 text-decoration-none"
                                             href="tel:+01234567890 "><small
-                                                class="badge rounded badge-soft-success false">{{ $profileData[0]->company }}</small>
+                                                class="badge rounded badge-soft-success false" style=" word-wrap: break-word; white-space: revert; ">{{ $profileData[0]->company }}</small>
                                         </a>
                                     </td>
                                 </tr>
@@ -138,7 +138,7 @@
                                 <div class="col-9 col-sm-7 mb-3">
                                     <input class="form-control datetimepicker" name="report_from_date"
                                         id="datetimepicker" type="text" placeholder="วัน/เดือน/ปี เวลา"
-                                        data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
+                                        data-options='{"enableTime":true,"dateFormat":"d-m-Y H:i","disableMobile":true}' />
                                 </div>
                                 <div class="col-3 text-lg-end">
                                     <label class="form-label" for="experience-to">เวลาออกงาน </label>
@@ -146,7 +146,7 @@
                                 <div class="col-9 col-sm-7 mb-3">
                                     <input class="form-control datetimepicker" name="report_to_date" id="datetimepicker"
                                         type="text" placeholder="วัน/เดือน/ปี เวลา"
-                                        data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
+                                        data-options='{"enableTime":true,"dateFormat":"d-m-Y H:i","disableMobile":true}' />
                                 </div>
                                 <div class="col-3 mb-3 text-lg-end">
                                     <label class="form-label" for="exp-description">รายงานการฝึกงานประจำวัน </label>

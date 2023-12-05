@@ -69,9 +69,9 @@
                                     <td class="text-nowrap">{{ mb_substr($item->report_comment, 0, 40,'utf8') }}</td>
                                     <td class="text-nowrap">
                                         {{ Carbon::parse($item->report_from_date)->thaidate('D j M y') }} เวลา
-                                        {{ mb_substr($item->report_from_date, 8, 20,'utf8') }} นาที</td>
+                                        {{ mb_substr($item->report_from_date, 10, 20,'utf8') }} นาที</td>
                                     <td class="text-nowrap">{{ Carbon::parse($item->report_to_date)->thaidate('D j M y') }}
-                                        เวลา {{ mb_substr($item->report_to_date, 8, 20,'utf8') }} นาที</td>
+                                        เวลา {{ mb_substr($item->report_to_date, 10, 20,'utf8') }} นาที</td>
                                     <td class="text-center" >
                                         <a class="btn btn-primary view-report btn-sm px-3 m-2 " href="#" data-bs-toggle="modal"
                                             data-bs-target="#report-modal" data-id="{{$item->idReport}}">ดูรายงาน/แก้ไข</a>
@@ -104,7 +104,7 @@
                                     <div class="col-9 col-sm-7 mb-3">
                                         <input class="form-control datetimepicker" name="report_from_date"
                                             id="datetimepicker" type="text" placeholder="วัน/เดือน/ปี เวลา"
-                                            data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
+                                            data-options='{"enableTime":true,"dateFormat":"d-m-Y H:i","disableMobile":true}' />
                                     </div>
                                     <div class="col-3 text-lg-end">
                                         <label class="form-label" for="experience-to">เวลาออกงาน </label>
@@ -112,7 +112,7 @@
                                     <div class="col-9 col-sm-7 mb-3">
                                         <input class="form-control datetimepicker" name="report_to_date" id="datetimepicker"
                                             type="text" placeholder="วัน/เดือน/ปี เวลา"
-                                            data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
+                                            data-options='{"enableTime":true,"dateFormat":"d-m-Y H:i","disableMobile":true}' />
                                     </div>
                                     <div class="col-3 mb-3 text-lg-end">
                                         <label class="form-label" for="exp-description">รายงานการฝึกงานประจำวัน </label>
@@ -166,7 +166,7 @@
                                     <div class="col-9 col-sm-7 mb-3">
                                         <input class="form-control datetimepicker" name="report_from_date"
                                             id="datetimepickerstart" type="text" placeholder="วัน/เดือน/ปี เวลา"
-                                            data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
+                                            data-options='{"enableTime":true,"dateFormat":"d-m-Y H:i","disableMobile":true}' />
                                     </div>
                                     <div class="col-3 text-lg-end">
                                         <label class="form-label" for="experience-to">เวลาออกงาน </label>
@@ -174,7 +174,7 @@
                                     <div class="col-9 col-sm-7 mb-3">
                                         <input class="form-control datetimepicker" name="report_to_date"
                                             id="datetimepickerend" type="text" placeholder="วัน/เดือน/ปี เวลา"
-                                            data-options='{"enableTime":true,"dateFormat":"d-m-y H:i","disableMobile":true}' />
+                                            data-options='{"enableTime":true,"dateFormat":"d-m-Y H:i","disableMobile":true}' />
                                     </div>
                                     <div class="col-3 mb-3 text-lg-end">
                                         <label class="form-label" for="exp-description">รายงานการฝึกงาน </label>

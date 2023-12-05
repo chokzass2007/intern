@@ -7,6 +7,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ControllerProvince;
+use App\Http\Controllers\EvalutionController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -33,10 +34,17 @@ Route::get('/', function () {
         return view('sau_login');
     }
 });
+//ประเมิณบริษัท
+Route::get('/evalution', [EvalutionController::class, 'index']);
+
+Route::post('/evalution/inserts', [EvalutionController::class, 'insertData'])->name('evalution.insert');
+// select idStudent
+Route::post('/evalution/idstudent', [EvalutionController::class, 'idstudent']);
 
 Route::get('/dashboard', function () {
     return view('sau_login');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 // Register
 Route::post('/registerr', [TeacherController::class, 'store'])->name('sau_register');
 // Select Province

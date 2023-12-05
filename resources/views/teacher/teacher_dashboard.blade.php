@@ -23,13 +23,16 @@
                         @foreach ($list as $item)
                             <tr class="align-middle">
                                 <td class="text-nowrap">
+
                                     <div class="d-flex align-items-center">
                                         <div class="avatar avatar-xl">
                                             <img class="rounded-circle"
                                                 src="{{ asset('') }}upload/{{ isset($item->photo) ? $item->photo : 'no_image.jpg' }}"
                                                 alt="" />
                                         </div>
-                                        <div class="ms-2">{{ $item->fName }} {{ $item->lName }}</div>
+
+                                        <div class="ms-2">{{ $item->idStudent }} {{ $item->fName }} {{ $item->lName }}
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="text-nowrap">
@@ -81,6 +84,12 @@
                                         data-bs-target="#cancel">ยกเลิก
                                     </button>
                                     <span style="color: red" class="text-end">* {{ $item->cal_comment }}</span>
+                                    @if ($item->score != null)
+                                        <span class="ps-3"> {{ $item->score }} คะแนน</span>
+                                    @else
+                                        <span class="ps-3"> ยังไม่ได้ประเมิน</span>
+                                    @endif
+
                                 </td>
                             </tr>
                         @endforeach
@@ -367,7 +376,7 @@
         })
 
     });
-   
+
     // cancel Intern
     $(document).on('click', '.btn-danger-input', function() {
         let id = $(this).val();

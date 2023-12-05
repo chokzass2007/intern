@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Report;
 use App\Models\Company;
+use App\Models\Evalution;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,13 +19,15 @@ class TeacherController extends Controller
         return view('teacher.teacher_dashboard');
     }
     //Detail Company
-    public function TeacherDetailCompany($id){
+    public function TeacherDetailCompany($id)
+    {
         // dd($id);
         $data = Company::find($id);
-        return view('teacher.teacher_company', compact('data')) ;
+        return view('teacher.teacher_company', compact('data'));
     }
     // ยกเลิกการฝึกงานกลางคัน (โดยอาจารย์)
-    public function TeacherApiCancel(Request $request){
+    public function TeacherApiCancel(Request $request)
+    {
         $request->validate([
             'user_id' => 'required',
             'com_id' => 'required',
@@ -39,7 +42,7 @@ class TeacherController extends Controller
         $user = User::find($request->user_id);
         $user->status = 'รอดำเนินการยื่นเรื่องฝึกงาน';
         $user->save();
-        return  ;
+        return;
     } // End Method
     // อนุมัติโดยอาจารย์
     public function TeacherApprove(Request $request)
@@ -55,9 +58,9 @@ class TeacherController extends Controller
 
         $idd = $request->com_id;
         $company = Company::find($idd);
-        $company->status= $request->status;
-        $company->start_intern= $request->start_intern;
-        $company->end_intern= $request->end_intern;
+        $company->status = $request->status;
+        $company->start_intern = $request->start_intern;
+        $company->end_intern = $request->end_intern;
         $company->save();
 
         $id = $request->user_id;
@@ -67,48 +70,45 @@ class TeacherController extends Controller
         $data->end_intern = $request->end_intern;
         $data->status = $request->status;
         $data->save();
-        return ;
-
-
+        return;
     } // End Method
 
     //  view report Student
-    public function TeacherViewReportStudent($com_id,$user_id)
+    public function TeacherViewReportStudent($com_id, $user_id)
     {
-        $data = Report::where('auth_id',$user_id)->where( 'com_id',$com_id)->join('companies', 'reports.com_id', '=', 'companies.id')
-        ->select('companies.*','reports.id AS idReport','reports.*')->get();
+        $data = Report::where('auth_id', $user_id)->where('com_id', $com_id)->join('companies', 'reports.com_id', '=', 'companies.id')
+            ->select('companies.*', 'reports.id AS idReport', 'reports.*')->get();
         // dd($data);
         return  view('teacher.teacher_report_list', compact('data'));
-
     } // End Method
     //  รับเอกสารสำเร็จ
-    public function TeacherApisuccess($com_id,$user_id)
+    public function TeacherApisuccess($com_id, $user_id)
     {
         $company = Company::find($com_id);
-        $company->status= 'รอฝึกงาน';
+        $company->status = 'รอฝึกงาน';
         $company->save();
 
         $User = User::find($user_id);
-        $User->status= 'รอฝึกงาน';
+        $User->status = 'รอฝึกงาน';
         $User->save();
     } // End Method
 
     //  เรียกข้อมูลไปแสดงหน้า modal
-    public function TeacherApiApprove($id,$ic)
+    public function TeacherApiApprove($id, $ic)
     {
         $idUser = User::find($id);
         $data['users'] = User::where('users.id', $id)->leftJoin('companies', 'companies.id', '=', 'users.company_intern')
             ->select(
-                'companies.id AS com_.id',//id company
-                'companies.company AS com_company',//name company
-                'users.id AS userId',// id user
-                'users.start_intern AS user_start',// start intern
-                'users.end_intern AS user_end'// end intern
+                'companies.id AS com_.id', //id company
+                'companies.company AS com_company', //name company
+                'users.id AS userId', // id user
+                'users.start_intern AS user_start', // start intern
+                'users.end_intern AS user_end' // end intern
             )
             ->get();
-            // dd($data['user']);
+        // dd($data['user']);
         //     $idU = $data['users']->com_id;
-        $data['company'] = Company::where('id',$ic)->select('id','company')->get();
+        $data['company'] = Company::where('id', $ic)->select('id', 'company')->get();
         return response()->json($data);
     } // End Method
 
@@ -124,6 +124,7 @@ class TeacherController extends Controller
             ->where('semester', $request->intern)
             ->select(
                 'users.fName',
+                'users.idStudent',
                 'users.id AS user_id',
                 'users.lName',
                 'users.photo',
@@ -135,9 +136,11 @@ class TeacherController extends Controller
                 'companies.bossName',
                 'companies.company',
                 'companies.cal_comment',
-                'companies.id AS com_id'
+                'companies.id AS com_id',
+                Evalution::raw('(SELECT A1 + A2 + A3 + A4 + B1 + B2 + B3 + C1 + C2 + C3 + D1 + D2 + D3 + E1 + E2 + E3 + F1 + F2 + F3 AS score FROM evalutions WHERE evalutions.idStudent = users.idStudent) AS score')
             )
             ->get();
+        // dd($list);
         return view('teacher.teacher_dashboard', compact('list'));
     } //End Method
 

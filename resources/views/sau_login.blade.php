@@ -72,27 +72,31 @@
                         <div class="card-body p-0">
                             <div class="row g-0 h-100">
                                 <div class="col-md-5 text-center bg-card-gradient">
-                                    <div class="position-relative p-4 pt-md-5 pb-md-7 light">
+                                    <div class="position-relative p-4 pt-md-2 pb-md-2 light">
                                         <div class="bg-holder bg-auth-card-shape"
                                             style="background-image:url(assets/img/icons/spot-illustrations/half-circle.png);">
                                         </div>
                                         <!--/.bg-holder-->
 
                                         <div class="z-index-1 position-relative "><a
-                                                class="link-light mb-4 font-sans-serif fs-1 d-inline-block fw-bolder"
+                                                class="link-light font-sans-serif fs-1 d-inline-block fw-bolder"
                                                 href="{{ url('/') }}">มหาวิทยาลัยเอเชียอาคเนย์<br><span
                                                     class="fs-0">Southeast Asia University</span><br>(SAU)</a>
                                             <p class="opacity-75 text-white ">
                                                 ระบบสารสนเทศนักศึกษาฝึกงาน<br></p>
-                                                <ul class="text-start">
-                                                  <li>ลงทะเบียนนักศึกษาฝึกงาน</li>
-                                                  <li>ลงทะเบียนสถานประกอบการเพื่อการฝึกงาน</li>
-                                                  <li>บันทึกการฝึกงานประจำวันนักศึกษาฝึกงาน</li>
-                                                  <li>ตรวจสอบ อนุมัติ ออกหนังสือการฝึกงาน</li>
-                                                  <li>นิเทศนักศึกษาฝึกงาน</li>
-                                                </ul>
+                                            <ul class="text-start">
+                                                <li>ลงทะเบียนนักศึกษาฝึกงาน</li>
+                                                <li>ลงทะเบียนสถานประกอบการเพื่อการฝึกงาน</li>
+                                                <li>บันทึกการฝึกงานประจำวันนักศึกษาฝึกงาน</li>
+                                                <li>ตรวจสอบ อนุมัติ ออกหนังสือการฝึกงาน</li>
+                                                <li>นิเทศนักศึกษาฝึกงาน</li>
+                                            </ul>
                                         </div>
-                                    </div>
+                                        <img class="rounded-4 p-3" src="{{ asset('img/qrcode.jpg') }}" alt="">
+                                    </div> <a
+                                                class="link-light mb-4 font-sans-serif fs-1 d-inline-block fw-bolder"
+                                                href="{{ url('/evalution') }}">แบบประะเมินนักศึกษาฝึกงาน<br><span
+                                                    class="fs-0">Southeast Asia University</span><br>(SAU)</a>
                                 </div>
                                 <div class="col-md-7 d-flex flex-center">
                                     <div class="p-4 p-md-5 flex-grow-1">

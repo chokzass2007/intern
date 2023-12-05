@@ -4612,7 +4612,7 @@ var wizardInit = function wizardInit() {
     prevButton.classList.add('d-none'); // on button click tab change
 
     nextButton.addEventListener('click', function () {
-      if ((!(inputEmail.value && validatePattern(emailPattern, inputEmail.value)) || !inputPassword.value || !inputConfirmPassword.value) && form.className.includes('needs-validation')) {
+      if ((!(inputEmail.value && validatePattern(emailPattern, inputEmail.value)))) {
         form.classList.add('was-validated');
       } else {
         count += 1;
@@ -4630,7 +4630,7 @@ var wizardInit = function wizardInit() {
       tabToggleButtonEl.forEach(function (item, index) {
         /* eslint-disable */
         item.addEventListener('shown.bs.tab', function (e) {
-          if ((!(inputEmail.value && validatePattern(emailPattern, inputEmail.value)) || !inputPassword.value || !inputConfirmPassword.value) && form.className.includes('needs-validation')) {
+          if ((!(inputEmail.value && validatePattern(emailPattern, inputEmail.value)))) {
             e.preventDefault();
             form.classList.add('was-validated');
             return null;
@@ -4638,7 +4638,11 @@ var wizardInit = function wizardInit() {
           }
 
           count = index; // can't go back tab
-
+          if(index === 2){
+            alert('count')
+            $('.next button').attr('id', 'value');
+          }
+          console.log(index)
           if (count === tabToggleButtonEl.length - 1) {
             tabToggleButtonEl.forEach(function (tab) {
               tab.setAttribute('data-bs-toggle', 'modal');
